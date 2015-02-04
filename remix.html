@@ -1,0 +1,145 @@
+<!--
+This is hopefully going to replace the current stlying with just a little bit of material design.
+Namely, it will be the buttons and maybe some jQuery elements.
+
+This new index and remix player will include elements from:
+	* polymer
+	* jQuery / jQuery UI
+	* a few HTML5 boilerplate things
+	* and of course, echonest related things
+-->
+
+<!doctype html>
+<html>
+	
+	<head>
+		<!-- Loading in polymer AND echonest stuff -->
+		<title>b∞x</title>
+		<meta name="description" content="A music player with multiple songs based off of the Infinite Jukebox">
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+		<script src="./components/bower_components/webcomponentsjs/webcomponents.js"></script>
+		<link rel="import" href="./components/bower_components/paper-button/paper-button.html">
+		<link rel="stylesheet" href="my.css">
+		<link rel="stylesheet" href="main.css">
+		<link href='http://fonts.googleapis.com/css?family=Playfair+Display:400,400italic' rel='stylesheet' type='text/css'>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>	<!-- "Updated" -->
+		<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" /> <!-- Updated -->
+		<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>	<!-- Updated -->
+		<script type="text/javascript" src="./js/watch-min.js"></script>					<!-- Minified, Updated -->
+		<script type="text/javascript" src="./js/jremix-min.js"></script>					<!-- Minified -->
+		<script type="text/javascript" src="./js/raphael-min.js"charset="utf-8"></script>	<!-- Updated  -->
+	</head>
+
+<body>
+<!-- Main content where title/info/player resides -->
+	<div id="main_content_player">
+		<div id='running'>
+			<div id='details'>
+				<div id="information_title">
+					<div id="title_header_player">b∞x</div>
+					<br />
+					<div id="info_text">for</div>
+					<br />
+					<div id="song-title">
+						<span id='song-title'></span>
+					</div>
+				</div>
+				<div id='button-panel'>
+					<span id='button-panel'>
+						<paper-button class='controls' id='new'>New</paper-button><paper-button class='controls2' id='tune'>Tune</paper-button><paper-button class='controls3' id='go'>Play</paper-button>
+					</span>
+				</div>
+			</div>
+
+			<div id='tiles'></div> 
+    
+			<div id='stats'>
+				<span id='sbeats'> Total Beats: <span id='beats'> 0 </span></span>
+				<span id='stime'> Listen Time: <span id='time'> 00:00:00 </span></span>
+			</div>
+			<div id="info"> </div>
+			<div id='error'> </div> 
+
+		</div>
+		<div id='global_footer'>
+			powered by <a href="http://developer.echonest.com/">echonest</a>, special thanks to <a href="https://twitter.com/plamere">Paul Lamere</a> for his original <a href="http://infinitejuke.com/">concept</a>.
+		</div>
+	</div>
+<!--
+jQuery UI controls found in the buttons
+
+Future Plans:
+	* Style this section with Material Design principles
+	* General Cleanup and/or renaming
+-->
+    <div id='controls'>
+        <div>
+            <div id='control-instructions'> 
+                You can tune control the frequency and quality of the branching. See the FAQ for more details.
+            </div>
+            <div id="threshold-div">
+                <div id='sthreshold'> Branch Similarity Threshold: <span id='threshold'> 50 </span> </div>
+
+                <div class='slider' id="threshold-slider"></div>  
+                <div id='slider-labels'> 
+                    <span class='left-label'> Higher<br> Quality </span> 
+                    <span class='right-label'> More <br>Branches </span>  
+                </div>
+            </div>
+            <br clear="all">
+            <div id="probability-div">
+                <div id='sprobability'> Branch Probability Range: 
+                    <span id='min-prob'></span>% to
+                    <span id='max-prob'></span>% 
+                </div>
+                <div class='slider' id="probability-slider"></div>  
+                <div id='slider-labels'> 
+                    <span class='left-label'> Low </span> 
+                    <span class='right-label'> High </span>  
+                </div>
+            </div>
+            <br clear="all">
+
+            <div id="probability-div">
+                <div id='sprobability'> Branch Probability Ramp-up Speed: 
+                    <span id='ramp-speed'>20</span>%
+                </div>
+                <div class='slider' id="probability-ramp-slider"></div>  
+                <div id='slider-labels'> 
+                    <span class='left-label'> Slow </span> 
+                    <span class='right-label'> Fast </span>  
+                </div>
+            </div>
+            <br clear="all">
+            <div class='l-cb' id='l-last-branch'> Loop extension optimization: <input type='checkbox' id='last-branch' checked> </div>
+            <div class='l-cb' id='l-reverse-branch'> Allow only reverse branches : <input type='checkbox' id='reverse-branch' > </div>
+            <div class='l-cb' id='l-long-branch'> Allow only long branches : <input type='checkbox' id='long-branch' > </div>
+            <div class='l-cb' id='l-sequential-branch'> Remove sequential branches: <input type='checkbox' id='sequential-branch' > </div>
+
+
+            <hr>
+            <div id='tune-info'>
+                <div id='l-branch-chance'> Branch chance (%): <span class='ti-val' id='branch-chance'>0</span></div> 
+                <div id='l-branch-threshold'> Last threshold: <span class='ti-val' id='last-threshold'>0</span></div> 
+                <br>
+                <div id='l-beat-count'> Total beats: <span class='ti-val' id='total-beats'></span></div> 
+                <div id='l-branch-count'> Total branches: <span class='ti-val' id='branch-count'></span></div> 
+                <div id='l-loop-length-beats'> Longest loop (beats):  <span class='ti-val' id='loop-length-beats'></span> </div>
+                <div id='l-loop-length-percent'> Longest loop (%):  <span class='ti-val' id='loop-length-percent'></span> </div>
+                <br>
+                <div id='l-deleted-branches'> Deleted branches: <span class='ti-val' id='deleted-branches'>0</span></div>  
+            </div>
+            <button class='cbut' id='reset-edges'> Reset </button> 
+        </div>
+    </div>
+
+<!-- 
+This is where the javascript for our slightly edited infinite jukebox begins.
+Credit wholly goes to Paul Lemere for this. Future hopes: completely replace this with our own two/multiple song version
+either with javascript or some sort of django implementation
+-->
+<script type="text/javascript" src="./js/jukebox-min.js"></script>
+</body>
+</html>

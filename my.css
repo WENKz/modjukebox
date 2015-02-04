@@ -1,0 +1,195 @@
+html,
+body {
+background: #eee;
+}
+
+#main_content {
+	background: #fff;
+    width: 501px;
+    height: 300px;
+    position: absolute;
+    top: -50px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    margin: auto;
+    box-shadow: 0 17px 50px 0 rgba(0, 0, 0, 0.19), 0 12px 15px 0 rgba(0, 0, 0, 0.24);
+}
+
+#global_footer {
+	font-family: 'Tahoma', sans-serif;
+	font-size: 9px;
+	position: absolute;
+	bottom: 5px;
+	right:5px;
+	color: #cfcfcf;
+}
+
+a:link {
+    color: #A5AEE6;
+	text-decoration:none;
+}
+
+a:visited {
+    color: #C2C8F2;
+	text-decoration:none;
+}
+
+#title_header {
+	font-family: 'Playfair Display', serif;
+	text-shadow : 1px 2px 1	px silver;
+	font-size: 40px;
+	text-align:center;
+	margin-top:60px;
+}
+
+body {
+	font-family: 'Lucida Grande', 'Helvetica Neue', sans-serif;
+	font-size: 13px;
+}
+
+/****** UPLOADER *****/
+.uploader {
+	position: relative;
+	top: 10px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	margin: auto;
+	text-align: center;
+}
+paper-button.upload_button {
+	background: #ccc;
+	margin-left:-5px;
+	border-radius:0px;
+}
+
+paper-button.upload_button::shadow #ripple { 
+	color:#FFF;
+}
+
+#upload {
+	background: transparent;
+	border:none;
+	font-family: Tahoma, sans-serif;
+	font-size: 10px;
+	padding:3px;
+}
+#choose_button {
+	display: none;
+	border: 0px;
+	border-radius:0px;
+	background: #f0f0f0;
+	padding: 10.5px !important;
+	position:relative;
+	top:0.5px;
+	left:2px;
+}
+
+#upload_confirm {
+	text-align:center-left;
+	left:10;
+	right:0;
+	margin: 10px 10px auto;
+	font-family:"Lucida Console";
+	font-size:11px;
+}
+/****************** remix.html related ********************/
+#main_content_player {
+	background: #fff;
+    width: 900px;
+    height: 700px;
+    position: absolute;
+    top: -50px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    margin: auto;
+    box-shadow: 0 17px 50px 0 rgba(0, 0, 0, 0.19), 0 12px 15px 0 rgba(0, 0, 0, 0.24);
+}
+
+#tiles {
+    position: absolute;
+    top: -5px;
+    left: 12.5px;
+    right: 0px;
+    margin: auto;
+z-index:1 !important;
+}
+
+#button-panel {
+	z-index:3 !important;
+	position: relative;
+	top: 10px;
+	left: 4px;
+	right: 0px;
+	bottom: 0px;
+	margin: auto;
+	text-align: center;
+}
+paper-button.controls,
+paper-button.controls2,
+paper-button.controls3 {
+	width:110px;
+}
+
+paper-button.controls {
+	background:#ddd;
+	border-radius:0px;
+}
+paper-button.controls2 {
+	background:#ddd;
+	border-radius: 0px;
+	left:-8px;
+}
+paper-button.controls3 {
+	background:#ddd;
+	border-radius: 0px;
+	left:-16px;
+}
+paper-button.controls::shadow #ripple,
+paper-button.controls2::shadow #ripple ,
+paper-button.controls3::shadow #ripple { 
+	color:#7667C9;
+}
+/*** Special title shit for the player ***/
+#information_title {
+	font-family: 'Playfair Display', serif;
+	text-shadow : 1px 2px 1	px silver;
+	text-align:center;
+	margin-top:40px;
+	line-height:3px;
+}
+
+#title_header_player {
+	font-size: 40px;
+	margin-top:2px;
+}
+#info_text {
+	font-size:10px;
+	margin-top: 19.5px;
+	font-family:Tahoma;
+}
+
+#song-title {
+	font-size: 20px;
+	font-weight: bold;
+	margin-top: 10px;
+}
+
+#info, #error {
+	font-family: 'Tahoma', sans-serif;
+	font-size: 11px;
+	color: #aaa;
+	position:absolute;
+	bottom: 20px;
+	left: 5px;
+}
+#stats {
+	font-family: 'Tahoma', sans-serif;
+	font-size: 11px;
+	position: absolute;
+	bottom: 5px;
+	left: 5px;
+	color:#aaa;
+}	
